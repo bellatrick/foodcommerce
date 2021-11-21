@@ -5,7 +5,7 @@ const typeDefs = require('./graphql/typedefs')
 const { MONGODB } = require("./config");
 const resolvers = require('./graphql/resolvers')
 const pubsub = new PubSub()
-const PORT = process.env.PORT ||PORT
+const port = process.env.PORT ||PORT
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -13,7 +13,7 @@ const server = new ApolloServer({
 });
 mongoose
   .connect(MONGODB, { useUnifiedTopology: true, useNewUrlParser: true })
-  .then(() => console.log("mongobd running"), server.listen({ port: PORT }))
+  .then(() => console.log("mongobd running"), server.listen({ port: port }))
   .then(() => {
     console.log("server is running");
   });

@@ -13,7 +13,7 @@ const server = new ApolloServer({
 });
 mongoose
   .connect(MONGODB, { useUnifiedTopology: true, useNewUrlParser: true })
-  .then(() => console.log("mongobd running"), server.listen({ port: PORT }))
+  .then(() => console.log("mongobd running"), server.listen({ port: port }))
   .then(() => {
     console.log("server is running");
   });
