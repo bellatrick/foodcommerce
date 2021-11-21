@@ -63,13 +63,8 @@ module.exports = {
       }
     },
     getMessages:async()=>{
-      try {
-        const messages = await Message.find();
-      return messages
-      } catch (err) {
-        console.log(err);
-      }
-    },
+      
+    }
     getShipping: async () => {
       try {
         const price = await ShippingCost.find();

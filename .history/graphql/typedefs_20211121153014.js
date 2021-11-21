@@ -32,7 +32,7 @@ module.exports = gql`
   type ShippingCost{
     uKToNigeria:String!
     nigeriaToUK:String!
-    id:ID
+    id:
   }
 type message{
   name:String!
@@ -46,7 +46,6 @@ type message{
    filterProductBySearch(keyword:String):[Products]!
    getCategories:[String]!
    getShipping:[ShippingCost]
-   getMessages:[message]
 
   }
   type Mutation {

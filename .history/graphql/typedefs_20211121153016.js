@@ -46,7 +46,6 @@ type message{
    filterProductBySearch(keyword:String):[Products]!
    getCategories:[String]!
    getShipping:[ShippingCost]
-   getMessages:[message]
 
   }
   type Mutation {

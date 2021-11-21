@@ -64,8 +64,8 @@ module.exports = {
     },
     getMessages:async()=>{
       try {
-        const messages = await Message.find();
-      return messages
+        const messagess = await Message.find();
+      return products
       } catch (err) {
         console.log(err);
       }
