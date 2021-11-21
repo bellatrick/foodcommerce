@@ -9,7 +9,7 @@ const PORT = process.env.PORT ||PORT
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context:({req})=>({req})
+  context:({req})=>({req,pubsub})
 });
 mongoose
   .connect(MONGODB, { useUnifiedTopology: true, useNewUrlParser: true })
