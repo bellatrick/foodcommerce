@@ -49,7 +49,7 @@ type Category{
    getProductByLocation(location:String):[Products]!
    getProductByCategory(category:String):[Products]!
    filterProductBySearch(keyword:String):[Products]!
-   getCategory:[Category]!
+   getCategory:[Cat]
    getCategories:[String]!
    getShipping:[ShippingCost]
    getMessages:[message]

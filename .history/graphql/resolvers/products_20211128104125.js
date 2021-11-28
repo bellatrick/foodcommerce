@@ -7,9 +7,9 @@ const filterResults = (list, keyword) => {
   console.log(list);
   return list.filter((x) => {
     const a = x?.name?.toLowerCase().split(" ");
-    const b=x?.desc?.toLowerCase().split(" ");
+    const b=x?.category?.toLowerCase().split(" ");
     const arr=[...a,...b]
-
+    console.log(arr);
     return arr?.some((y) => y.includes(keyword.toLowerCase()));
   });
 };

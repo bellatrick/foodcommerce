@@ -1,24 +1,22 @@
 const { UserInputError } = require("apollo-server");
 const Product = require("../../models/product");
 const Message = require("../../models/Message");
-const ShippingCost = require("../../models/ShippingCost");
-const Category = require("../../models/category");
-const filterResults = (list, keyword) => {
-  console.log(list);
-  return list.filter((x) => {
-    const a = x?.name?.toLowerCase().split(" ");
-    const b=x?.desc?.toLowerCase().split(" ");
-    const arr=[...a,...b]
-
-    return arr?.some((y) => y.includes(keyword.toLowerCase()));
-  });
-};
+const ShippingCost=require('../../models/ShippingCost')
+const Category= require('../../models/category')
+const filterResults=(list,keyword)=>{
+  console.log(list)
+  return list.filter(x=>{
+    const arr =x?.name?.toLowerCase().split(' ')
+    console.log(arr)
+    return arr?.some(y=>y.includes(keyword.toLowerCase()))
+  })
+}
 module.exports = {
   Query: {
     filterProductBySearch: async (_, { keyword }) => {
       try {
         const products = await Product.find();
-        const filteredProduct = filterResults(products, keyword);
+        const filteredProduct = filterResults(products,keyword)
         if (filteredProduct.length < 0) {
           throw new UserInputError(
             "Sorry! not product found with that keyword! Try searching with a more specific term"
@@ -60,23 +58,15 @@ module.exports = {
     getAllProducts: async () => {
       try {
         const products = await Product.find();
-        return products;
+      return products
       } catch (err) {
         console.log(err);
       }
     },
-    getMessages: async () => {
+    getMessages:async()=>{
       try {
         const messages = await Message.find();
-        return messages;
-      } catch (err) {
-        console.log(err);
-      }
-    },
-    getCategory: async () => {
-      try {
-        const category = await Category.find();
-        return category;
+      return messages
       } catch (err) {
         console.log(err);
       }
@@ -84,7 +74,7 @@ module.exports = {
     getShipping: async () => {
       try {
         const price = await ShippingCost.find();
-        return price;
+       return price
       } catch (err) {
         console.log(err);
       }
@@ -105,28 +95,33 @@ module.exports = {
     },
   },
   Mutation: {
-    postShippingCost: async (_, { uKToNigeria, nigeriaToUK }) => {
-      try {
-        const newShipping = new ShippingCost();
-        newShipping.uKToNigeria = uKToNigeria;
-        newShipping.nigeriaToUK = nigeriaToUK;
+    postShippingCost:async(_,{uKToNigeria,nigeriaToUK})=>{
+      try{
+        const newShipping = new ShippingCost;
+        newShipping.uKToNigeria=uKToNigeria
+        newShipping.nigeriaToUK=nigeriaToUK
         const shipping = await newShipping.save();
         return {
           ...shipping._docs,
-          id: shipping._id,
-        };
-      } catch (err) {
-        console.log(err);
+          id:shipping._id
+
+        }
+      }catch(err){
+        console.log(err)
       }
     },
-    editShipping: async (_, { uKToNigeria, nigeriaToUK, id }) => {
+    editShipping: async (
+      _,
+      { uKToNigeria,nigeriaToUK, id }
+    ) => {
       try {
         const shipping = await ShippingCost.findById(id);
         if (!shipping) {
           throw new UserInputError("Wrong id passed");
-        } else {
-          shipping.uKToNigeria = uKToNigeria;
-          shipping.nigeriaToUK = nigeriaToUK;
+        } 
+        else {
+          shipping.uKToNigeria=uKToNigeria
+          shipping.nigeriaToUK=nigeriaToUK
           await shipping.save();
         }
         return shipping;
@@ -151,20 +146,21 @@ module.exports = {
     },
     editProduct: async (
       _,
-      { name, desc, category, price, images, location, id }
+      { name, desc, category, price, images, location , id }
     ) => {
       try {
         const products = await Product.findById(id);
-
+    
         if (!products) {
           throw new UserInputError("Product not found");
-        } else {
-          products.name = name;
-          products.desc = desc;
-          products.category = category;
-          products.price = price;
-          products.images = images;
-          products.location = location;
+        } 
+        else {
+          products.name=name
+          products.desc=desc
+          products.category=category
+          products.price=price
+          products.images=images
+          products.location=location
           await products.save();
         }
         return products;
@@ -185,20 +181,20 @@ module.exports = {
         throw new UserInputError("Something went wrong");
       }
     },
-    postCategory: async (_, { name, image }) => {
-      try {
-        const newCategory = new Category({
-          name,
-          image,
-        });
-        const category = await newCategory.save();
-        return {
-          ...category._doc,
-          id: category._id,
-        };
-      } catch (err) {
-        throw new UserInputError("Something went wrong");
-      }
+    postCategory:async(_,{name,image})=>{
+  try{
+    const newCategory = new Category({
+      name,
+      image,
+    });
+    const category = await newproduct.save();
+    return {
+      ...product._doc,
+      id:product._id
+    }
+  }catch(err){
+    throw new UserInputError("Something went wrong");
+  }
     },
     postProduct: async (
       _,
@@ -216,8 +212,8 @@ module.exports = {
         const product = await newproduct.save();
         return {
           ...product._doc,
-          id: product._id,
-        };
+          id:product._id
+        }
       } catch (err) {
         throw new UserInputError("Something went wrong");
       }

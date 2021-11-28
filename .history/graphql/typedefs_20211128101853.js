@@ -41,15 +41,13 @@ type message{
 }
 type Category{
   name:String!
-  image:String!
-  id:ID!
+  image:String
 }
   type Query {
    getAllProducts:[Products]
    getProductByLocation(location:String):[Products]!
    getProductByCategory(category:String):[Products]!
    filterProductBySearch(keyword:String):[Products]!
-   getCategory:[Category]!
    getCategories:[String]!
    getShipping:[ShippingCost]
    getMessages:[message]

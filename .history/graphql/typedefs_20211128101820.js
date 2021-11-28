@@ -39,17 +39,12 @@ type message{
   email:String!
   message:String
 }
-type Category{
-  name:String!
-  image:String!
-  id:ID!
-}
+input 
   type Query {
    getAllProducts:[Products]
    getProductByLocation(location:String):[Products]!
    getProductByCategory(category:String):[Products]!
    filterProductBySearch(keyword:String):[Products]!
-   getCategory:[Category]!
    getCategories:[String]!
    getShipping:[ShippingCost]
    getMessages:[message]
@@ -64,6 +59,6 @@ type Category{
     postMessage(name:String,email:String,message:String):message!
     postShippingCost(uKToNigeria:String,nigeriaToUK:String):ShippingCost!
     editShipping(uKToNigeria:String,nigeriaToUK:String,id:ID):ShippingCost!
-    postCategory(name:String, image:String):Category!
+    postCategory(name:String, image:String)
   }
 `;
