@@ -191,7 +191,7 @@ module.exports = {
         if (!category) {
           throw new Error("Category not found");
         } else {
-          await category.delete();
+          await products.delete();
           return "Category deleted successfully";
         }
       } catch (err) {

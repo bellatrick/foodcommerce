@@ -65,7 +65,6 @@ type Category{
     postShippingCost(uKToNigeria:String,nigeriaToUK:String):ShippingCost!
     editShipping(uKToNigeria:String,nigeriaToUK:String,id:ID):ShippingCost!
     postCategory(name:String, image:String):Category!
-    deleteCategory(id:ID):String!
-
+    
   }
 `;

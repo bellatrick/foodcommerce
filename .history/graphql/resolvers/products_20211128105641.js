@@ -187,12 +187,12 @@ module.exports = {
     },
     deleteCategory: async (_, { id }) => {
       try {
-        const category = await Category.findById(id);
-        if (!category) {
-          throw new Error("Category not found");
+        const products = await Category.findById(id);
+        if (!products) {
+          throw new Error("Product not found");
         } else {
-          await category.delete();
-          return "Category deleted successfully";
+          await products.delete();
+          return "Post deleted successfully";
         }
       } catch (err) {
         throw new UserInputError("Something went wrong");
