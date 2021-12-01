@@ -151,7 +151,7 @@ module.exports = {
     },
     editProduct: async (
       _,
-      { name, desc, category, price, images, location, id, inStock }
+      { name, desc, category, price, images, location, id, in }
     ) => {
       try {
         const products = await Product.findById(id);
@@ -163,7 +163,6 @@ module.exports = {
           products.desc = desc;
           products.category = category;
           products.price = price;
-          products.inStock=inStock
           products.images = images;
           products.location = location;
           await products.save();

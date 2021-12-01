@@ -61,7 +61,7 @@ type Category{
     register(registerInput: RegisterInput): UserReg!
     login(username: String!, password: String!): UserReg!
     postProduct(input:ProductInput):Products!
-    editProduct(id:ID!,name:String,desc:String,category:String,location:String,price:String, images:[String], inStock:Boolean):Products!
+    editProduct(id:ID!,name:String,desc:String,category:String,location:String,price:String, images:[String], inStock:):Products!
     deleteProduct(id:ID):String!
     postMessage(name:String,email:String,message:String):message!
     postShippingCost(uKToNigeria:String,nigeriaToUK:String):ShippingCost!

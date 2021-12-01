@@ -163,7 +163,6 @@ module.exports = {
           products.desc = desc;
           products.category = category;
           products.price = price;
-          products.inStock=inStock
           products.images = images;
           products.location = location;
           await products.save();
