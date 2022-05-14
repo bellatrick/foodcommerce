@@ -2,7 +2,7 @@ const { model, Schema } = require("mongoose");
 
 const receiptSchema = new Schema(
   {
-    customer_name: String,
+    name: String,
     phone: String,
     price:String,
     desc: String,
