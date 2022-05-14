@@ -3,6 +3,7 @@ const Product = require("../../models/product");
 const Message = require("../../models/Message");
 const ShippingCost = require("../../models/ShippingCost");
 const Category = require("../../models/category");
+const Receipt =require('../../models/receipt')
 const filterResults = (list, keyword) => {
   console.log(list);
   return list.filter((x) => {
@@ -61,6 +62,14 @@ module.exports = {
       try {
         const products = await Product.find();
         return products;
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    getAllReceipts: async () => {
+      try {
+        const receipts = await Receipt.find();
+        return receipts;
       } catch (err) {
         console.log(err);
       }
@@ -145,6 +154,19 @@ module.exports = {
         const msg = await newMessage.save();
 
         return msg;
+      } catch (err) {
+        throw new UserInputError("Something went wrong");
+      }
+    },
+    postReceipt: async (_, {  phone, price,date,name ,desc }) => {
+      try {
+        const newReceipt = new Receipt({
+          phone, price,date,name ,desc 
+        });
+
+        const receipt = await newReceipt.save();
+
+        return receipt;
       } catch (err) {
         throw new UserInputError("Something went wrong");
       }

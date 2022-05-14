@@ -31,6 +31,13 @@ module.exports = gql`
   images: [String]!
   inStock:Boolean!
   }
+  input receiptInput{
+  name:String
+  phone:String
+  date:String
+  desc:String
+  price:String
+}
   type ShippingCost{
     uKToNigeria:String!
     nigeriaToUK:String!
@@ -40,6 +47,13 @@ type message{
   name:String!
   email:String!
   message:String
+}
+type receipt{
+  name:String
+  phone:String
+  date:String
+  desc:String
+  price:String
 }
 type Category{
   name:String!
@@ -55,12 +69,14 @@ type Category{
    getCategories:[String]!
    getShipping:[ShippingCost]
    getMessages:[message]
+   getAllReceipts:[receipt]
 
   }
   type Mutation {
     register(registerInput: RegisterInput): UserReg!
     login(username: String!, password: String!): UserReg!
     postProduct(input:ProductInput):Products!
+    postReceipt(input:receiptInput):receipt!
     editProduct(id:ID!,name:String,desc:String,category:String,location:String,price:String, images:[String], inStock:Boolean):Products!
     deleteProduct(id:ID):String!
     postMessage(name:String,email:String,message:String):message!
