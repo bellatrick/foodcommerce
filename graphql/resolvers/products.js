@@ -3,13 +3,13 @@ const Product = require("../../models/product");
 const Message = require("../../models/Message");
 const ShippingCost = require("../../models/ShippingCost");
 const Category = require("../../models/category");
-const Receipt =require('../../models/receipt')
+const Receipt = require("../../models/receipt");
 const filterResults = (list, keyword) => {
   console.log(list);
   return list.filter((x) => {
     const a = x?.name?.toLowerCase().split(" ");
-    const b=x?.desc?.toLowerCase().split(" ");
-    const arr=[...a,...b]
+    const b = x?.desc?.toLowerCase().split(" ");
+    const arr = [...a, ...b];
 
     return arr?.some((y) => y.includes(keyword.toLowerCase()));
   });
@@ -158,15 +158,20 @@ module.exports = {
         throw new UserInputError("Something went wrong");
       }
     },
-    postReceipt: async (_, {  phone, price,date,name ,desc }) => {
+    postReceipt: async (_, { phone, price, date, name, desc }) => {
       try {
         const newReceipt = new Receipt({
-          phone, price,date,name ,desc 
+          phone,
+          price,
+          date,
+          name,
+          desc,
         });
-
-        const receipt = await newReceipt.save();
-
-        return receipt;
+       const receipt = await newReceipt.save();
+        return {
+          ...receipt._doc,
+          id: receipt._id,
+        };
       } catch (err) {
         throw new UserInputError("Something went wrong");
       }
@@ -185,7 +190,7 @@ module.exports = {
           products.desc = desc;
           products.category = category;
           products.price = price;
-          products.inStock=inStock
+          products.inStock = inStock;
           products.images = images;
           products.location = location;
           await products.save();
@@ -238,7 +243,7 @@ module.exports = {
     },
     postProduct: async (
       _,
-      { input: { name, desc, category, price, images, location,inStock } }
+      { input: { name, desc, category, price, images, location, inStock } }
     ) => {
       try {
         const newproduct = new Product({

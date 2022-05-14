@@ -32,10 +32,10 @@ module.exports = gql`
   inStock:Boolean!
   }
   input receiptInput{
-  name:String
-  phone:String
-  date:String
-  desc:String
+  name:String!
+  phone:String!
+  date:String!
+  desc:String!
   price:String
 }
   type ShippingCost{
@@ -49,10 +49,10 @@ type message{
   message:String
 }
 type receipt{
-  name:String
-  phone:String
-  date:String
-  desc:String
+  name:String!
+  phone:String!
+  date:String!
+  desc:String!
   price:String
 }
 type Category{
