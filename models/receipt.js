@@ -4,6 +4,7 @@ const receiptSchema = new Schema(
   {
     customer_name: String,
     phone: String,
+    total_price:String,
     product_summary: Array,
   },
   {

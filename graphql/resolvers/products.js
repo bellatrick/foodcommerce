@@ -127,12 +127,13 @@ module.exports = {
         console.log(err);
       }
     },
-    postReceipt: async (_, { customer_name, phone, product_summary }) => {
+    postReceipt: async (_, { customer_name, phone, product_summary,total_price }) => {
       try {
         const newReceipt = new Receipt();
         newReceipt.customer_name = customer_name;
         newReceipt.phone = phone;
         newReceipt.product_summary = product_summary;
+        newReceipt.total_price=total_price
         const receipt = await newReceipt.save();
         return {
           ...receipt._docs,

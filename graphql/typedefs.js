@@ -50,6 +50,7 @@ type Receipt{
   customer_name:String!
   phone:String!
   product_summary:Array!
+  total_price:String
 }
   type Query {
    getAllProducts:[Products]
@@ -70,7 +71,7 @@ type Receipt{
     editProduct(id:ID!,name:String,desc:String,category:String,location:String,price:String, images:[String], inStock:Boolean):Products!
     deleteProduct(id:ID):String!
     postMessage(name:String,email:String,message:String):message!
-    postReceipt(customer_name:String, phone:String, product_summary:Array)
+    postReceipt(customer_name:String, phone:String, product_summary:Array,total_price:String)
     postShippingCost(uKToNigeria:String,nigeriaToUK:String):ShippingCost!
     editShipping(uKToNigeria:String,nigeriaToUK:String,id:ID):ShippingCost!
     postCategory(name:String, image:String):Category!
