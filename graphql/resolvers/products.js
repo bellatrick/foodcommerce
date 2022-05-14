@@ -2,14 +2,14 @@ const { UserInputError } = require("apollo-server");
 const Product = require("../../models/product");
 const Message = require("../../models/Message");
 const ShippingCost = require("../../models/ShippingCost");
+const Reciept = require("../../models/receipt");
 const Category = require("../../models/category");
 const filterResults = (list, keyword) => {
   console.log(list);
   return list.filter((x) => {
     const a = x?.name?.toLowerCase().split(" ");
-    const b=x?.desc?.toLowerCase().split(" ");
-    const arr=[...a,...b]
-
+    const b = x?.desc?.toLowerCase().split(" ");
+    const arr = [...a, ...b];
     return arr?.some((y) => y.includes(keyword.toLowerCase()));
   });
 };
@@ -89,6 +89,14 @@ module.exports = {
         console.log(err);
       }
     },
+    getAllReciepts: async () => {
+      try {
+        const receipt = await Receipt.find();
+        return receipt;
+      } catch (err) {
+        console.log(err);
+      }
+    },
     getProductByLocation: async (_, { location }) => {
       try {
         const products = await Product.find();
@@ -114,6 +122,21 @@ module.exports = {
         return {
           ...shipping._docs,
           id: shipping._id,
+        };
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    postReceipt: async (_, { customer_name, phone, product_summary }) => {
+      try {
+        const newReceipt = new Receipt();
+        newReceipt.customer_name = customer_name;
+        newReceipt.phone = phone;
+        newReceipt.product_summary = product_summary;
+        const receipt = await newReceipt.save();
+        return {
+          ...receipt._docs,
+          id: receipt._id,
         };
       } catch (err) {
         console.log(err);
@@ -163,7 +186,7 @@ module.exports = {
           products.desc = desc;
           products.category = category;
           products.price = price;
-          products.inStock=inStock
+          products.inStock = inStock;
           products.images = images;
           products.location = location;
           await products.save();
@@ -216,7 +239,7 @@ module.exports = {
     },
     postProduct: async (
       _,
-      { input: { name, desc, category, price, images, location,inStock } }
+      { input: { name, desc, category, price, images, location, inStock } }
     ) => {
       try {
         const newproduct = new Product({
