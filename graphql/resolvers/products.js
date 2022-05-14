@@ -158,7 +158,7 @@ module.exports = {
         throw new UserInputError("Something went wrong");
       }
     },
-    postReceipt: async (_, { phone, price, date, name, desc }) => {
+    postReceipt: async (_, { input: { phone, price, date, name, desc } }) => {
       try {
         const newReceipt = new Receipt({
           phone,
@@ -167,7 +167,7 @@ module.exports = {
           name,
           desc,
         });
-       const receipt = await newReceipt.save();
+        const receipt = await newReceipt.save();
         return {
           ...receipt._doc,
           id: receipt._id,
