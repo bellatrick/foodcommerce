@@ -1,22 +1,15 @@
 const { ApolloServer } = require("apollo-server");
 const mongoose = require("mongoose");
-const express = require( `express` );
-const cors = require('cors')
-const typeDefs = require("./graphql/typedefs");
+
+const typeDefs = require('./graphql/typedefs')
 const { MONGODB } = require("./config");
-const resolvers = require("./graphql/resolvers");
-const app = express();
-app.use(cors())
-var corsOptions = {
-  origin: '*',
-  credentials: true
-};
-const PORT = 5000;
+const resolvers = require('./graphql/resolvers')
+
+const PORT = process.env.PORT ||PORT
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({ req }) => ({ req }),
-  cors: corsOptions
+  context:({req})=>({req})
 });
 mongoose
   .connect(MONGODB, { useUnifiedTopology: true, useNewUrlParser: true })
